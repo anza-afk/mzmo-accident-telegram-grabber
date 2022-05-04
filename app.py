@@ -6,17 +6,14 @@ config.read("config.ini")
 api_id   = config['Telegram']['api_id']
 api_hash = config['Telegram']['api_hash']
 
-
-client = TelegramClient('mzmograbber', api_id, api_hash)
+client = TelegramClient('mzmo-grabber', api_id, api_hash)
 client.start()
 
 print('STARTED')  # LOGGING HERE IF NEEDED
 
-@client.on(events.NewMessage(chats=[-1001125494101]))
+@client.on(events.NewMessage(chats=[-1001125494101, '@Ondor']))
 async def normal_handler(event):
-    # username = '@' + str(event.chat.username)
     if 'pushkino' in str(event.message).lower():
-        if isinstance(event.chat, types.Channel):
-            await client.send_message(-100236842683, event.message)
-            print(event.message)
+        await client.send_message(entity=-1001606300804, message=event.message)
+        print(event.message)
 client.run_until_disconnected()
