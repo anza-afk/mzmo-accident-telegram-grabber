@@ -21,7 +21,7 @@ vlan_dict = [
     ('v3219','Поликлиника №7 - Софрино-1, 52а'),
     ('v3826','Поликлиника №8 - Ашукино, Школьная, 3'),
     ('v3223','Амбулатория №1 - Лесные Поляны, Ленина, 7'),
-    ('v3210','Амбулатория №2 - Пушкино, Вокзальная, 11'),
+    ('v3210','Амбулатория №2 - Заветы Ильича (Пушкино), Вокзальная, 11'),
     ('v3222','Амбулатория №3 - Тарасовка, Вокзальная, 3'),
     ('v3103','Амбулатория №4 - Зверосовхоз, Школьная, 5'),
     ('v3213','Амбулатория №5 - Ельдигино, Парковая, 11'),
@@ -50,15 +50,15 @@ print('STARTED', chats)  # LOGGING HERE IF NEEDED
 
 @client.on(events.NewMessage(chats=chats))
 async def normal_handler(event):
-    grabbed_string = str(event.message.message).lower()
+    grabbed_string = str(event.message.message)
     if 'pushkino' in grabbed_string:
         for vlan, lpu in vlan_dict:
-            if vlan in grabbed_string:
+            if vlan in grabbed_string.lower():
                 grabbed_vlan = lpu
         try:
-            grabbed_string = f'{grabbed_vlan}\n\n{grabbed_string}'
+            grabbed_string = f'Achtung!!!\n\n{grabbed_vlan}\n\n{grabbed_string}'
         except UnboundLocalError:
-            grabbed_string = f'vlan не найден!\n\n{grabbed_string}'
+            grabbed_string = f'Achtung!!!\n\nvlan не найден!\n\n{grabbed_string}'
         await client.send_message(entity=entity, message=grabbed_string)
         print(grabbed_string)
 client.run_until_disconnected()
