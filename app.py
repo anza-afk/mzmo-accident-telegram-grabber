@@ -19,7 +19,7 @@ print('STARTED', chats)  # ADD LOGGING HERE IF NEEDED
 @client.on(events.NewMessage(chats=chats))
 async def normal_handler(event):
     grabbed_string = str(event.message.message)
-    if 'pushkino' in grabbed_string:
+    if 'pushkino' in grabbed_string or 'ivanteevka' in grabbed_string:
         for vlan, lpu in vlan_dict:
             if vlan in grabbed_string.lower():
                 grabbed_vlan = lpu
